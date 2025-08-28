@@ -415,9 +415,10 @@ model School {
   contact2    String?
   contact3    String?
   email       String? 
-  email2      String? 
+  email2      String?
+  website     String? 
   logo        String?
-  status      Boolean  @default(true)
+  isActive      Boolean  @default(true)
   adminId     String
   admin       User     @relation("SchoolAdmin", fields: [adminId], references: [id], onDelete: Cascade)
   academicYears AcademicYear[]

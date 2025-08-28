@@ -35,7 +35,7 @@ export const columns: ColumnDef<School>[] = [
     enableHiding: false,
   },
     {
-    accessorKey: "imageUrl",
+    accessorKey: "logo",
     header: "School Badge",
     cell: ({ row }) => <ImageColumn row={row} accessorKey="logo" />,
   },

@@ -73,9 +73,11 @@ export interface SchoolProps {
   contact3?: string;
   email?: string;
   email2?: string;
+  website?: string;    // ✅ added
   logo?: string;
-  status?: boolean;
+  isActive?: boolean;  // ✅ renamed to match Prisma
   adminId: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
+

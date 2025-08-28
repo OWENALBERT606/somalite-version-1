@@ -55,9 +55,10 @@ export default function NewSchoolForm({
   email: initialData?.email || "",
   email2: initialData?.email2 || "",
   logo: initialData?.logo || "",
+  website: initialData?.website || "",
 
   // system fields
-  status: initialData?.status ?? true,
+  isActive: initialData?.isActive ?? true,
   adminId: initialData?.adminId || "",
 
     },
@@ -75,7 +76,9 @@ export default function NewSchoolForm({
       data.slug = generateSlug(data.name);
       data.logo = imageUrl;
       data.adminId = selectedUser?.value || null;
-      
+
+      console.log(data)
+
       if (editingId) {
         await updateSchoolById(editingId, data);
         setLoading(false);
@@ -166,8 +169,14 @@ export default function NewSchoolForm({
                     name="email"
                     type="email"
                   />
+                  <TextInput
+                    register={register}
+                    errors={errors}
+                    label="School Website"
+                    name="website"
+                  />
                 <FormSelectInput
-                label="User"
+                label="Administrator"
                   options={users ?? []}   // ✅ fallback to []
                 option={selectedUser}
                 setOption={setSelectedUser}
@@ -198,10 +207,10 @@ export default function NewSchoolForm({
         </div>
       </div>
       <FormFooter
-        href="/categories"
+        href="/schools"
         editingId={editingId}
         loading={loading}
-        title="Category"
+        title="School"
         parent=""
       />
     </form>
