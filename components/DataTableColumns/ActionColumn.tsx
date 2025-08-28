@@ -24,7 +24,7 @@ import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { deleteUser } from "@/actions/users";
-import { deleteBlogById } from "@/actions/blogs";
+import { deleteSchool } from "@/actions/schools";
 
 type ActionColumnProps = {
   row: any;
@@ -48,8 +48,8 @@ export default function ActionColumn({
           window.location.reload();
         }
         toast.success(`${model} Deleted Successfully`);
-      } else if (model === "blog") {
-        const res = await deleteBlogById(id);
+      } else if (model === "school") {
+        const res = await deleteSchool(id);
         if (res?.ok) {
           window.location.reload();
         }

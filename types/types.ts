@@ -61,3 +61,21 @@ export interface RoleResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface SchoolProps {
+  id?: string;
+  name: string;
+  motto?: string;
+  slug: string;
+  address?: string;
+  contact?: string;
+  contact2?: string;
+  contact3?: string;
+  email?: string;
+  email2?: string;
+  logo?: string;
+  status?: boolean;
+  adminId: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}

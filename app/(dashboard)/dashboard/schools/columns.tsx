@@ -10,8 +10,8 @@ import ImageColumn from "@/components/DataTableColumns/ImageColumn";
 import SortableColumn from "@/components/DataTableColumns/SortableColumn";
 import { ColumnDef } from "@tanstack/react-table";
 import ActionColumn from "@/components/DataTableColumns/ActionColumn";
-import { Category } from "@prisma/client";
-export const columns: ColumnDef<Category>[] = [
+import { School } from "@prisma/client";
+export const columns: ColumnDef<School>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -34,15 +34,24 @@ export const columns: ColumnDef<Category>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: "title",
-    header: ({ column }) => <SortableColumn column={column} title="Title" />,
-  },
-  {
+    {
     accessorKey: "imageUrl",
-    header: "Category Image",
-    cell: ({ row }) => <ImageColumn row={row} accessorKey="imageUrl" />,
+    header: "School Badge",
+    cell: ({ row }) => <ImageColumn row={row} accessorKey="logo" />,
   },
+  {
+    accessorKey: "name",
+    header: ({ column }) => <SortableColumn column={column} title="Name" />,
+  },
+  {
+    accessorKey: "parents.length",
+    header: ({ column }) => <SortableColumn column={column} title="Parents" />,
+  },
+  {
+    accessorKey: "students.length",
+    header: ({ column }) => <SortableColumn column={column} title="Students" />,
+  },
+
 
   {
     accessorKey: "createdAt",
@@ -52,13 +61,13 @@ export const columns: ColumnDef<Category>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const category = row.original;
+      const school = row.original;
       return (
         <ActionColumn
           row={row}
-          model="category"
-          editEndpoint={`categories/update/${category.id}`}
-          id={category.id}
+          model="school"
+          editEndpoint={`/dashboard/schools/update/${school.id}`}
+          id={school.id}
         />
       );
     },

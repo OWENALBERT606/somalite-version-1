@@ -18,15 +18,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Category } from "@prisma/client";
+
 import { getNormalDate } from "@/lib/getNormalDate";
+import { School } from "@prisma/client";
 
 export default function CustomDataTable({
-  categories,
+  schools,
 }: {
-  categories: Category[];
+  schools: School[];
 }) {
-  console.log(categories);
   return (
     <Card>
       <CardContent>
@@ -46,21 +46,21 @@ export default function CustomDataTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories.map((category) => {
-              const date = getNormalDate(category.createdAt);
+            {schools.map((school:any) => {
+              const date = getNormalDate(school.createdAt);
               return (
-                <TableRow key={category.id}>
+                <TableRow key={school.id}>
                   <TableCell className="hidden sm:table-cell">
                     <Image
-                      alt={category.title}
+                      alt={school.name}
                       className="aspect-square rounded-md object-cover"
                       height="64"
-                      src={category.imageUrl ?? ""}
+                      src={school.logo ?? ""}
                       width="64"
                     />
                   </TableCell>
                   <TableCell className="font-medium">
-                    {category.title}
+                    {school.name}
                   </TableCell>
                   {/* <TableCell>
                     <Badge variant="outline">

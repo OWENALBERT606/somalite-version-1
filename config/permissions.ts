@@ -55,6 +55,17 @@ export const permissions: ModulePermissions[] = [
     },
   },
   {
+    display: "Schools",
+    name: "schools",
+    permissions: {
+      create: "schools.create",
+      read: "schools.read",
+      update: "schools.update",
+      delete: "schools.delete",
+    },
+  },
+ 
+  {
     display: "Customers",
     name: "customers",
     permissions: {

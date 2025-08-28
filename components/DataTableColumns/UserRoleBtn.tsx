@@ -29,10 +29,15 @@ export default function UserRoleBtn({ user }: UserRoleBtnProps) {
   // Get current role from user's roles array
   const currentRole = user.roles[0]; // Assuming user has at least one role
 
-  const [selectedRole, setSelectedRole] = useState<RoleOption>({
-    label: currentRole?.displayName || "No Role",
-    value: currentRole?.id || "",
-  });
+  // const [selectedRole, setSelectedRole] = useState<RoleOption>({
+  //   label: currentRole?.displayName || "No Role",
+  //   value: currentRole?.id || "",
+  // });
+
+const [selectedRole, setSelectedRole] = useState<any | null>({
+  label: currentRole?.displayName || "No Role",
+  value: currentRole?.id || "",
+});
 
   useEffect(() => {
     async function fetchRoles() {
@@ -92,12 +97,19 @@ export default function UserRoleBtn({ user }: UserRoleBtnProps) {
           </DialogTitle>
           <DialogDescription>
             <form className="space-y-4" onSubmit={handleChangeStatus}>
-              <FormSelectInput
+              {/* <FormSelectInput
                 label="User Role"
                 options={roles}
                 option={selectedRole}
                 setOption={setSelectedRole}
-              />
+              /> */}
+                 <FormSelectInput
+                              label="User Role"
+                                options={roles ?? []}   // ✅ fallback to []
+                              option={selectedRole}
+                              setOption={setSelectedRole}
+                              isSearchable={true}
+                            />
               <DialogFooter>
                 <SubmitButton
                   title="Update Role"

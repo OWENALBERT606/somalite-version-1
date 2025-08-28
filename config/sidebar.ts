@@ -4,6 +4,7 @@ import {
   BarChart2,
   BarChart4,
   Book,
+  BookA,
   Cable,
   CircleDollarSign,
   FolderTree,
@@ -67,6 +68,40 @@ export const sidebarLinks: ISidebarLink[] = [
       },
     ],
   },
+  {
+    title: "Academics Management",
+    icon: BookA,
+    href: "/dashboard/academics/years",
+    dropdown: true,
+    permission: "years.read",
+    dropdownMenu: [
+      {
+        title: "Schools",
+        href: "/dashboard/schools",
+        permission: "schools.read",
+      },
+      {
+        title: "Academic Years",
+        href: "/dashboard/academics/years",
+        permission: "years.read",
+      },
+      {
+        title: "Roles",
+        href: "/dashboard/users/roles",
+        permission: "roles.read",
+      },
+      {
+        title: "Change Password",
+        href: "/dashboard/change-password",
+        permission: "roles.read",
+      },
+      {
+        title: "Profile",
+        href: "/dashboard/profile",
+        permission: "roles.read",
+      },
+    ],
+  },
   // {
   //   title: "Inventory",
   //   icon: BaggageClaim,
@@ -106,11 +141,11 @@ export const sidebarLinks: ISidebarLink[] = [
   //   ],
   // },
   {
-    title: "Blogs",
+    title: "Schools",
     icon: Book,
     dropdown: false,
-    href: "/dashboard/blogs",
-    permission: "blogs.read",
+    href: "/dashboard/schools",
+    permission: "schools.read",
   },
   {
     title: "N'osigaki",

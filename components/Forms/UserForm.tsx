@@ -102,8 +102,11 @@ export default function UserForm({
         setLoading(false);
         // Toast
         toast.success("Successfully Created!");
+
         //reset
         reset();
+        router.push("/dashboard/users");
+
       }
     } catch (error) {
       setLoading(false);
@@ -204,7 +207,7 @@ export default function UserForm({
               title="Profile Image"
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
-              endpoint="warehouseLogo"
+              endpoint="userAvatar"
             />
           </div>
         </div>

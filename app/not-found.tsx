@@ -1,5 +1,4 @@
 "use client";
-import UnderDevelopmentPage from "@/components/john/new-hom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home } from "lucide-react";
 import Link from "next/link";
@@ -8,8 +7,8 @@ import React from "react";
 export default function NotFound() {
   return (
     <div className="">
-      <UnderDevelopmentPage/>
-      {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative h-[calc(550px-85px)] flex justify-center items-center flex-col">
           <svg
             width="314"
@@ -98,7 +97,7 @@ export default function NotFound() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

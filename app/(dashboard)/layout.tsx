@@ -1,5 +1,6 @@
 import Navbar from "@/components/dashboard/Navbar";
 import Sidebar from "@/components/dashboard/Sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authOptions } from "@/config/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -15,12 +16,18 @@ export default async function DashboardLayout({
     redirect("/login");
   }
   return (
-    <div className="min-h-screen w-full">
+    <SidebarProvider>
+       <div className="min-h-screen w-full">
       <Sidebar session={session} />
       <div className="md:ml-[220px] lg:ml-[280px]">
-        <Navbar session={session} />
+        <SidebarInset>
+           <Navbar session={session} />
         <div className="p-8">{children}</div>
+          </SidebarInset>
+       
       </div>
     </div>
+    </SidebarProvider>
+   
   );
 }
