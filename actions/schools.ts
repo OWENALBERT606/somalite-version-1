@@ -120,3 +120,26 @@ export async function createBulkSchools(schools: SchoolProps[]) {
     console.error(error);
   }
 }
+
+
+// Get all schools by adminId
+export async function getSchoolsByAdminId(adminId: string) {
+  try {
+    const schools = await db.school.findMany({
+      where: { adminId },
+      include: {
+        admin: true,
+        academicYears: true,
+        classes: true,
+        teachers: true,
+        parents: true,
+        students: true,
+      },
+    });
+
+    return schools;
+  } catch (error) {
+    console.error("Error fetching schools:", error);
+    return [];
+  }
+}

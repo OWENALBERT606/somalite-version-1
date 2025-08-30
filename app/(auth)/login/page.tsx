@@ -10,6 +10,13 @@ export default async function page() {
   if (session) {
     redirect("/dashboard");
   }
+
+  console.log(session)
+
+  // const role=session?..roles[0]?.roleName;
+  //         if(role!=="schooladmin" && role!=="teacher"){
+  //           redirect("/");}
+  
   return (
     <GridBackground>
       <div className="px-4">

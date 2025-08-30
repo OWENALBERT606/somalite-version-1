@@ -334,6 +334,7 @@ export async function createUser(data: UserProps) {
       // Check for existing users
       const existingUserByEmail = await tx.user.findUnique({
         where: { email },
+        include: { roles: true,schoolAdmins:true },
       });
 
       const existingUserByPhone = await tx.user.findUnique({
@@ -429,6 +430,7 @@ export async function getAllUsers() {
       },
       include: {
         roles: true,
+        schoolAdmins:true
       },
     });
     return users;
@@ -460,7 +462,7 @@ export async function getUserById(id: string) {
     const user = await db.user.findUnique({
       where: {
         id,
-      },
+      },include: { roles: true,schoolAdmins:true }
     });
     return user;
   } catch (error) {

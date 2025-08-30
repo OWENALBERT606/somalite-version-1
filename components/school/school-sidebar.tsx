@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import {
     Collapsible,
@@ -50,14 +51,13 @@ import {
 // import Logo from '@/components/Logo';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { UserDropdownMenu } from '../UserDropdownMenu';
   
 
-export default function SchoolSidebar() {
-  const user={
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  }
+export default function SchoolSidebar({session,school}:{session:any,school:any}) {
+    const router = useRouter();
 
   const sidebarLinks = [
     {
@@ -292,7 +292,14 @@ export default function SchoolSidebar() {
     },
   ];
   
-  
+    async function handleLogout() {
+    try {
+      await signOut();
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Sidebar collapsible="icon">
@@ -300,7 +307,7 @@ export default function SchoolSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
             <SidebarMenuButton tooltip="School-Guru">
-                  <Image src="/education-school-logo-design-template_731136-92.jpg" width={40} alt='schoolLogo' height={40}/><span>GreenWood Academy</span>
+                  <Image src={school.logo} width={40} alt='schoolLogo' height={40}/><span>{school.name}</span>
                 </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -344,88 +351,14 @@ export default function SchoolSidebar() {
         </SidebarContent>
         <SidebarFooter>
           <SidebarMenu>
-            <SidebarMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton
-                    size="lg"
-                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                  >
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage
-                        src={user.avatar}
-                        alt={user.name}
+             <UserDropdownMenu
+                        username={session?.user?.name ?? ""}
+                        email={session?.user?.email ?? ""}
+                        avatarUrl={
+                          session?.user?.image ??
+                          "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%20(54)-NX3G1KANQ2p4Gupgnvn94OQKsGYzyU.png"
+                        }
                       />
-                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">
-                        {user.name}
-                      </span>
-                      <span className="truncate text-xs">
-                        {user.email}
-                      </span>
-                    </div>
-                    <ChevronsUpDown className="ml-auto size-4" />
-                  </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                  side="bottom"
-                  align="end"
-                  sideOffset={4}
-                >
-                  <DropdownMenuLabel className="p-0 font-normal">
-                    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                      <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage
-                          src={user.avatar}
-                          alt={user.name}
-                        />
-                        <AvatarFallback className="rounded-lg">
-                          CN
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-semibold">
-                          {user.name}
-                        </span>
-                        <span className="truncate text-xs">
-                          {user.email}
-                        </span>
-                      </div>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      <Sparkles />
-                      Upgrade to Pro
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      <BadgeCheck />
-                      Account
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <CreditCard />
-                      Billing
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Bell/>
-                      Notifications
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <LogOut />
-                    Log out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>
         <SidebarRail />

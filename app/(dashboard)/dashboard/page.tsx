@@ -8,6 +8,8 @@ import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const user = await getAuthenticatedUser();
+
+  console.log(user)
   return (
     <main>
       {/* <div className="space-y-6">

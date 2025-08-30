@@ -13,7 +13,8 @@ async function getUserWithRoles(userId: string) {
   const user = await db.user.findUnique({
     where: { id: userId },
     include: {
-      roles: true, // Include roles relation
+      roles: true,
+      schoolAdmins:true // Include roles relation
     },
   });
 
@@ -79,7 +80,9 @@ export const authOptions: NextAuthOptions = {
           image: profile.picture,
           email: profile.email,
           roles: defaultRole ? [defaultRole] : [],
-          permissions: defaultRole ? defaultRole.permissions : [], // Include permissions from default role
+          permissions: defaultRole ? defaultRole.permissions : [], 
+          schoolAdmins:[0],
+          // Include permissions from default role
         };
       },
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -154,7 +157,7 @@ export const authOptions: NextAuthOptions = {
       ) {
         const existingUser = await db.user.findUnique({
           where: { email: user.email! },
-          include: { roles: true },
+          include: { roles: true , schoolAdmins:true},
         });
 
         if (!existingUser?.roles?.length) {
@@ -189,12 +192,22 @@ export const authOptions: NextAuthOptions = {
         token.phone = user.phone;
         token.roles = user.roles;
         token.permissions = user.permissions;
+         const school = await db.school.findFirst({
+      where: { adminId: user.id },
+      select: { id: true, slug: true, name: true },
+    });
+    token.school = school || null;
       } else {
         // For subsequent requests, refresh roles and permissions
         const userData = await getUserWithRoles(token.id);
         if (userData) {
           token.roles = userData.roles;
           token.permissions = userData.permissions;
+             const school = await db.school.findFirst({
+        where: { adminId: token.id },
+        select: { id: true, slug: true, name: true },
+      });
+      token.school = school || null;
         }
       }
       return token;
@@ -210,6 +223,7 @@ export const authOptions: NextAuthOptions = {
         session.user.phone = token.phone;
         session.user.roles = token.roles;
         session.user.permissions = token.permissions;
+        session.user.school = token.school;
       }
       return session;
     },

@@ -1,24 +1,27 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, BookOpen, GraduationCap, TrendingUp } from "lucide-react"
 
-const stats = [
+
+
+export function DashboardStats({school}:{school:any}) {
+  const stats = [
   {
     title: "Total Students",
-    value: "1,247",
+    value: school.students.length,
     change: "+12 this term",
     icon: Users,
     color: "text-chart-1",
   },
   {
     title: "Active Teachers",
-    value: "89",
+    value: school.teachers.length,
     change: "+3 new hires",
     icon: GraduationCap,
     color: "text-chart-2",
   },
   {
     title: "Classes",
-    value: "42",
+    value: school.classes.length,
     change: "15 subjects",
     icon: BookOpen,
     color: "text-chart-3",
@@ -31,8 +34,6 @@ const stats = [
     color: "text-chart-4",
   },
 ]
-
-export function DashboardStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat) => (

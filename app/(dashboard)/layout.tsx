@@ -15,6 +15,8 @@ export default async function DashboardLayout({
   if (!session) {
     redirect("/login");
   }
+
+  console.log(session)
   return (
     <SidebarProvider>
        <div className="min-h-screen w-full">

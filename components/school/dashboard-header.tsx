@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 
-export function DashboardHeader() {
+export function DashboardHeader({school}:{school:any}) {
   return (
     <header className="bg-primary text-primary-foreground shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-           <Image src="/education-school-logo-design-template_731136-92.jpg" width={40} alt='schoolLogo' height={40}/>
+           <Image src={school.logo} width={40} alt='schoolLogo' height={40}/>
             <div>
-              <h1 className="text-xl font-bold text-balance">Greenwood Academy</h1>
+              <h1 className="text-xl font-bold text-balance">{school.name}</h1>
               <p className="text-sm opacity-90">Academic Year 2024/2025 • Term 1</p>
             </div>
           </div>
